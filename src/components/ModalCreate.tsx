@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { UserInfo } from '../types/types';
 import { createUser } from '../services/api';
+import { translateTitle } from '../services/translate';
 
 export default function ModalCreate({ onClose }: { onClose: () => void }) {
 
@@ -54,7 +55,7 @@ export default function ModalCreate({ onClose }: { onClose: () => void }) {
                         >
                             {TITLE_OPTIONS.map((option) => (
                                 <option key={option} value={option}>
-                                    {option}
+                                    {translateTitle(option)}
                                 </option>
                             ))}
                         </select>

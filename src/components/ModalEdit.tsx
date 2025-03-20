@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { UserInfo , ModalEditProps } from '../types/types';
 import { updateUser, getUserById } from '../services/api';
+import { translateTitle } from '../services/translate';
 
 export default function ModalEdit({ user, onClose }: ModalEditProps) {
     const [dataUser, setDataUser] = useState<UserInfo>();
@@ -65,7 +66,7 @@ export default function ModalEdit({ user, onClose }: ModalEditProps) {
                         >
                             {TITLE_OPTIONS.map((option) => (
                                 <option key={option} value={option}>
-                                    {option}
+                                    {translateTitle(option)}
                                 </option>
                             ))}
                         </select>
