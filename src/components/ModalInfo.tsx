@@ -1,4 +1,5 @@
-import React, { useEffect , useState } from 'react';
+import { useEffect , useState } from 'react';
+import { translateTitle } from '../services/translate';
 import { UserInfo , ModalInfoProps } from '../types/types';
 import { getUserById } from '../services/api';
 
@@ -23,18 +24,18 @@ export default function ModalInfo({ idUser, onClose }: ModalInfoProps) {
     }
     
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-black p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
-                <h2 className="text-xl font-bold mb-4">Información del Usuario</h2>
+        <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
+                <h2 className="text-xl font-bold mb-4 text-black">Información del Usuario</h2>
                 {dataUser ? (
-                    <div className='flex flex-col w-full'>
+                    <div className='flex flex-col w-full text-black'>
                         <div className='flex flex-row justify-between align-center'>
                             <p>Id: </p>
                             <p>{dataUser.id}</p>
                         </div>
                         <div className='flex flex-row justify-between align-center'>
                             <p>Título: </p>
-                            <p>{dataUser.title} </p>
+                            <p>{translateTitle(dataUser.title)} </p>
                         </div>
                         <div className='flex flex-row justify-between align-center'>
                             <p>Nombres: </p>
@@ -46,7 +47,7 @@ export default function ModalInfo({ idUser, onClose }: ModalInfoProps) {
                         </div>
                         <div className='flex flex-row justify-between align-center'>
                             <p>Imagen: </p>
-                            <p> {dataUser.picture}</p>
+                            <p className='break-words max-w-1/2 text-right'> {dataUser.picture}</p>
                         </div>
                         <div className='flex flex-row justify-between align-center'>
                             <p>Género: </p>

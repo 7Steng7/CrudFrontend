@@ -40,8 +40,8 @@ export default function ModalCreate({ onClose }: { onClose: () => void }) {
         };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-        <div className="bg-black-200 p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
+        <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
+        <div className="bg-black p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
             <h2 className="text-xl font-bold mb-4 text-white m-4" >Crear un usuario</h2>
             <div className='flex flex-col w-full'>
                     {/* Campo: Título */}

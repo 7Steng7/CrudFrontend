@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { useUsers } from './hooks/useUsers';
 import { User } from './types/types';
+import { translateTitle } from './services/translate';
 import ModalInfo from './components/ModalInfo';
 import ModalEdit from './components/ModalEdit';
 import ModalDelete from './components/ModalDelete';
@@ -14,7 +15,7 @@ function App() {
   const [ modalDelete , setModalDelete ] = useState<string | null>(null);
   const [ modalCreate , setModalCreate ] = useState<boolean>(false);
 
-  const { firstData, pageBack, pageNext, actualPage, totalPages  } = useUsers();
+  const { firstData, pageBack, pageNext, actualPage, totalPages } = useUsers();
 
   const openModalInfo = (id: string) => {
     setModalInfo(id);
@@ -86,7 +87,7 @@ function App() {
                                 {user.id}
                             </th>
                             <td className="px-6 py-4">
-                               {!!user.title ? `${user.title}. ${user.firstName} ${user.lastName}` : `${user.firstName} ${user.lastName}`}
+                               {!!user.title ? `${translateTitle(user.title)}. ${user.firstName} ${user.lastName}` : `${user.firstName} ${user.lastName}`}
                             </td>
                             <td className="px-6 py-4">
                               {!!user.picture ? <img className='w-12 h-12 md:w-32 md:h-32 rounded-full object-cover' src={user.picture} alt="userPicture" /> : <img className='w-40 h-40 rounded-full' src='https://bahiacc.com/wp-content/uploads/2018/04/avatar-hombre-300x300.jpg' alt="userPicture" />} 

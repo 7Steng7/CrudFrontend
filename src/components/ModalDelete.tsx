@@ -13,7 +13,7 @@ export default function ModalDelete ({ idUser, onClose }: ModalDeleteProps) {
     };
 
     return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
             <div className="bg-gray-200 p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
             <p className='text-black text-lg '>Deseas eliminar el usuario {idUser}?</p>
             <button onClick={deleteData} className='text-lg m-4'>Si</button>

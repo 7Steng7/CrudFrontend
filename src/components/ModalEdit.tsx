@@ -47,7 +47,7 @@ export default function ModalEdit({ user, onClose }: ModalEditProps) {
     }
     
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
             <div className="bg-gray-200 p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
                 <h2 className="text-xl font-bold mb-4 text-black" >Editar Usuario</h2>
                 {dataUser ? (
