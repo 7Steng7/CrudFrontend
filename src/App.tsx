@@ -1,47 +1,20 @@
-import { useEffect , useState } from 'react'
+import { useState } from 'react'
 import './App.css'
-import { getPaginatedUsers } from './services/api';
+import { useUsers } from './hooks/useUsers';
 import { User } from './types/types';
 import ModalInfo from './components/ModalInfo';
-import ModalEdit from './components/modalEdit';
-import ModalDelete from './components/modalDelete';
-import ModalCreate from './components/modalCreate';
+import ModalEdit from './components/ModalEdit';
+import ModalDelete from './components/ModalDelete';
+import ModalCreate from './components/ModalCreate';
 
 function App() {
 
-  const [ firstData, setFirstData ] = useState<User[]>([]);
-  const [ actualPage , setActualPage ] = useState(0);
-  const [ totalPages , setTotalPages ] = useState(0);
   const [ modalInfo , setModalInfo ] = useState<string | null>(null);
   const [ modalEdit , setModalEdit ] = useState<User | null>(null);
   const [ modalDelete , setModalDelete ] = useState<string | null>(null);
   const [ modalCreate , setModalCreate ] = useState<boolean>(false);
 
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const dataReady = await getPaginatedUsers({ page: actualPage, limit: 10 });
-        setFirstData(dataReady.data);
-        const totalPagesFromData = Math.ceil(dataReady.total / 10);
-        setTotalPages(totalPagesFromData);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-    getData();
-  }, [actualPage]);
-
-  const pageBack = () => {
-    if (actualPage > 0) {
-      setActualPage(actualPage - 1);
-    }
-  };
-  const pageNext = () => {
-    if (actualPage < totalPages - 1) {
-      setActualPage(actualPage + 1);
-    }
-  };
+  const { firstData, pageBack, pageNext, actualPage, totalPages  } = useUsers();
 
   const openModalInfo = (id: string) => {
     setModalInfo(id);
@@ -116,12 +89,12 @@ function App() {
                                {!!user.title ? `${user.title}. ${user.firstName} ${user.lastName}` : `${user.firstName} ${user.lastName}`}
                             </td>
                             <td className="px-6 py-4">
-                              {!!user.picture ? <img className='w-40 h-40 rounded-full' src={user.picture} alt="userPicture" /> : <img className='w-40 h-40 rounded-full' src='https://bahiacc.com/wp-content/uploads/2018/04/avatar-hombre-300x300.jpg' alt="userPicture" />} 
+                              {!!user.picture ? <img className='w-12 h-12 md:w-32 md:h-32 rounded-full object-cover' src={user.picture} alt="userPicture" /> : <img className='w-40 h-40 rounded-full' src='https://bahiacc.com/wp-content/uploads/2018/04/avatar-hombre-300x300.jpg' alt="userPicture" />} 
                             </td>
                             <td className="px-6 p-4">
-                                <button onClick={() => openModalDelete(user.id)} className='m-2'>🗑️</button>
-                                <button onClick={() => openModalEdit(user)} className='m-2'>✏️</button>
-                                <button onClick={() => openModalInfo(user.id)} className='m-2'>👁️</button>
+                                <button onClick={() => openModalDelete(user.id)} className='m-2' title="Eliminar usuario">🗑️</button>
+                                <button onClick={() => openModalEdit(user)} className='m-2' title="Editar usuario">✏️</button>
+                                <button onClick={() => openModalInfo(user.id)} className='m-2' title="Información del usuario">👁️</button>
                             </td>
                         </tr>
                     ))}
