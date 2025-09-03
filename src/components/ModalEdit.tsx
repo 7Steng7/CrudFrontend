@@ -1,39 +1,20 @@
-import { useState, useEffect } from 'react';
-import { UserInfo , ModalEditProps } from '../types/types';
-import { updateUser, getUserById } from '../services/api';
+import { ModalEditProps } from '../types/types';
 import { translateTitle } from '../services/translate';
+import { useGetUserById } from '../hooks/useGetUserById';
 
-export default function ModalEdit({ user, onClose }: ModalEditProps) {
-    const [dataUser, setDataUser] = useState<UserInfo>();
-    const [editableUser, setEditableUser] = useState<UserInfo | null>(null);
+export default function ModalEdit({ user, onClose, refresh }: ModalEditProps) {
     const TITLE_OPTIONS = ['mr','ms', 'mrs', 'miss', 'dr'];
     const GENDER_OPTIONS = ['male','female', 'other'];
     
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const userDataFetched = await getUserById(user.id);
-                setDataUser(userDataFetched);
-                setEditableUser(userDataFetched);
-            } catch (error) {
-                console.error('Error fetching user by id:', error);
-            }
-        };
-            getData();
-        }, [user.id]);
+    const userData = useGetUserById(user.id, refresh, onClose);
 
-    const putData = async () => {
-        try {
-            const userDataFetched = await updateUser(editableUser);
-            setDataUser(userDataFetched);
-        } catch (error) {
-            console.error('Error fetching user by id:', error);
-        }
-        onClose();
-    };
+    if (!userData || !userData.dataUser) {
+        return null;
+    }
+    const { dataUser, editableUser, setEditableUser, putData } = userData;
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
+    const { name, value } = e.target;
         if (editableUser) {
             setEditableUser({
                 ...editableUser,
@@ -73,7 +54,7 @@ export default function ModalEdit({ user, onClose }: ModalEditProps) {
                         </div>
                         <div className='flex flex-row justify-between align-center'>
                             <p className='text-black text-xl'>Nombres: </p>
-                            <input type="text" name='phone' value={editableUser?.firstName || ''} onChange={handleInputChange} className='text-black text-xl'/>
+                            <input type="text" name='firstName' value={editableUser?.firstName || ''} onChange={handleInputChange} className='text-black text-xl'/>
                         </div>
                         <div className='flex flex-row justify-between align-center'>
                             <p className='text-black text-xl'>Apellidos: </p>
@@ -104,7 +85,13 @@ export default function ModalEdit({ user, onClose }: ModalEditProps) {
                         </div>
                         <div className='flex flex-row justify-between align-center'>
                             <p className='text-black text-xl'>Fecha de nacimiento: </p>
-                            <p className='text-black text-xl'> {new Date(dataUser.dateOfBirth).toLocaleDateString()} </p>
+                                <input
+                                type="date"
+                                name="dateOfBirth"
+                                value={editableUser?.dateOfBirth ? new Date(editableUser.dateOfBirth).toISOString().split("T")[0] : ""}
+                                onChange={handleInputChange}
+                                className="border rounded px-2 text-black text-xl m-4"
+                                />
                         </div>
                         <div className='flex flex-row justify-between align-center'>
                             <p className='text-black text-xl'>Telefono: </p>

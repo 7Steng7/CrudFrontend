@@ -1,11 +1,12 @@
 import { ModalDeleteProps } from '../types/types';
 import { deleteUser } from '../services/api';
 
-export default function ModalDelete ({ idUser, onClose }: ModalDeleteProps) {
+export default function ModalDelete ({ idUser, onClose, refresh }: ModalDeleteProps) {
     const deleteData = async () => {
         try {
             const userDataFetched = await deleteUser(idUser);
-            console.log('Se, eliminó el usuario:', userDataFetched);
+            console.log('Se eliminó el usuario:', userDataFetched);
+            refresh();
         } catch (error) {
             console.error('Error fetching user by id:', error);
         }

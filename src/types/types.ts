@@ -33,9 +33,11 @@ export interface ModalInfoProps {
 export interface ModalEditProps {
     user: User;
     onClose: () => void;
+    refresh: () => void;
 }
 
 export interface ModalDeleteProps {
     idUser: string;
     onClose: () => void;
+    refresh: () => void;
 }

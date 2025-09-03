@@ -3,23 +3,23 @@ import { UserInfo } from '../types/types';
 import { createUser } from '../services/api';
 import { translateTitle } from '../services/translate';
 
-export default function ModalCreate({ onClose }: { onClose: () => void }) {
+export default function ModalCreate({ onClose, refresh }: { onClose: () => void, refresh: () => void }) {
 
+    const TITLE_OPTIONS = ['mr','ms', 'mrs', 'miss', 'dr'];
+    const GENDER_OPTIONS = ['male','female', 'other'];
         const [newUser, setNewUser] = useState<UserInfo>({
             id: '', 
-            title: '',
+            title: TITLE_OPTIONS[0],
             firstName: '',
             lastName: '',
             picture: '',
-            gender: '',
+            gender: GENDER_OPTIONS[0],
             email: '',
             dateOfBirth: '',
             phone: '',
             registerDate: '',
             updatedDate: '',
         });
-        const TITLE_OPTIONS = ['mr','ms', 'mrs', 'miss', 'dr'];
-        const GENDER_OPTIONS = ['male','female', 'other'];
 
         const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
             const { name, value } = e.target;
@@ -33,6 +33,7 @@ export default function ModalCreate({ onClose }: { onClose: () => void }) {
         const handleCreateUser = async () => {
             try {
                 await createUser(newUser);
+                refresh();
                 onClose();
             } catch (error) {
                 console.error('Error creating user:', error);

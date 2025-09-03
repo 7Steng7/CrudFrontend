@@ -15,7 +15,7 @@ function App() {
   const [ modalDelete , setModalDelete ] = useState<string | null>(null);
   const [ modalCreate , setModalCreate ] = useState<boolean>(false);
 
-  const { firstData, pageBack, pageNext, actualPage, totalPages } = useUsers();
+  const { firstData, getData, pageBack, pageNext, actualPage, totalPages } = useUsers();
 
   const openModalInfo = (id: string) => {
     setModalInfo(id);
@@ -54,9 +54,9 @@ function App() {
     </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           {modalInfo && <ModalInfo idUser={modalInfo} onClose={closeModalInfo} />}
-          {modalEdit && <ModalEdit user={modalEdit} onClose={closeModalEdit} />}
-          {modalDelete && <ModalDelete idUser={modalDelete} onClose={closeModalDelete} />}
-          {modalCreate && <ModalCreate onClose={closeModalCreate} />}
+          {modalEdit && <ModalEdit user={modalEdit} onClose={closeModalEdit} refresh={getData} />}
+          {modalDelete && <ModalDelete idUser={modalDelete} onClose={closeModalDelete} refresh={getData} />}
+          {modalCreate && <ModalCreate onClose={closeModalCreate} refresh={getData} />}
           <div className='flex justify-end m-8'>
             <button onClick={() => setModalCreate(true)}>Crear usuario</button>
           </div>
