@@ -24,11 +24,11 @@ export default function ModalInfo({ idUser, onClose }: ModalInfoProps) {
     }
     
     return (
-        <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
+        <main className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
+            <aside className="bg-white p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
                 <h2 className="text-xl font-bold mb-4 text-black">Información del Usuario</h2>
                 {dataUser ? (
-                    <div className='flex flex-col w-full text-black'>
+                    <section className='flex flex-col w-full text-black'>
                         <div className='flex flex-row justify-between align-center'>
                             <p>Id: </p>
                             <p>{dataUser.id}</p>
@@ -45,10 +45,12 @@ export default function ModalInfo({ idUser, onClose }: ModalInfoProps) {
                             <p>Apellidos: </p>
                             <p> {dataUser.lastName}</p>
                         </div>
-                        <div className='flex flex-row justify-between align-center'>
+                        <figure className='flex flex-row justify-between align-center'>
                             <p>Imagen: </p>
-                            <p className='break-words max-w-1/2 text-right'> {dataUser.picture}</p>
-                        </div>
+                            <p className="break-words max-w-[250px] truncate text-right underline">
+                                {dataUser.picture}
+                            </p>
+                        </figure>
                         <div className='flex flex-row justify-between align-center'>
                             <p>Género: </p>
                             <p> {dataUser.gender}</p>
@@ -65,7 +67,7 @@ export default function ModalInfo({ idUser, onClose }: ModalInfoProps) {
                             <p>Telefono: </p>
                             <p> {dataUser.phone}</p>
                         </div>
-                    </div>
+                    </section>
                 ) : (
                     <p>Cargando...</p>
                 )}
@@ -75,8 +77,8 @@ export default function ModalInfo({ idUser, onClose }: ModalInfoProps) {
                 >
                     Cancelar
                 </button>
-            </div>
-        </div>
+            </aside>
+        </main>
     );
 }
 

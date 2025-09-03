@@ -28,11 +28,11 @@ export default function ModalEdit({ user, onClose, refresh }: ModalEditProps) {
     }
     
     return (
-        <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
-            <div className="bg-gray-200 p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
+        <main className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
+            <aside className="bg-gray-200 p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
                 <h2 className="text-xl font-bold mb-4 text-black" >Editar Usuario</h2>
                 {dataUser ? (
-                    <div className='flex flex-col w-full'>
+                    <section className='flex flex-col w-full'>
                         <div className='flex flex-row justify-between align-center'>
                             <p className='text-black text-xl'>Id: </p>
                             <p className='text-black text-xl'>{dataUser.id}</p>
@@ -60,10 +60,10 @@ export default function ModalEdit({ user, onClose, refresh }: ModalEditProps) {
                             <p className='text-black text-xl'>Apellidos: </p>
                             <input type="text" name='lastName' value={editableUser?.lastName || ''} onChange={handleInputChange} className='text-black text-xl'/>
                         </div>
-                        <div className='flex flex-row justify-between align-center'>
+                        <figure className='flex flex-row justify-between align-center'>
                             <p className='text-black text-xl'>Imagen: </p>
                             <input type="text" name='picture' value={editableUser?.picture || ''} onChange={handleInputChange} className='text-black text-xl'/>
-                        </div>
+                        </figure>
                         <div className='flex flex-row justify-between align-center'>
                             <p className='text-black text-xl'>Género: </p>
                             <select
@@ -97,7 +97,7 @@ export default function ModalEdit({ user, onClose, refresh }: ModalEditProps) {
                             <p className='text-black text-xl'>Telefono: </p>
                             <input type="number" name='phone' value={editableUser?.phone || ''} onChange={handleInputChange}  className='text-black text-xl'/>
                         </div>
-                    </div>
+                    </section>
                 ) : (
                     <p>Cargando...</p>
                 )}
@@ -113,8 +113,8 @@ export default function ModalEdit({ user, onClose, refresh }: ModalEditProps) {
                 >
                     Cancelar
                 </button>
-            </div>
-        </div>
+            </aside>
+        </main>
     );
 }
 

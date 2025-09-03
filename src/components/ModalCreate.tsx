@@ -41,10 +41,10 @@ export default function ModalCreate({ onClose, refresh }: { onClose: () => void,
         };
 
     return (
-        <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
-        <div className="bg-black p-6 rounded-lg shadow-lg max-w-xl w-5/6 ">
+        <main className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center">
+        <aside className="bg-black p-6 rounded-lg shadow-lg max-w-xl w-5/6">
             <h2 className="text-xl font-bold mb-4 text-white m-4" >Crear un usuario</h2>
-            <div className='flex flex-col w-full'>
+            <section className='flex flex-col w-full'>
                     {/* Campo: Título */}
                     <div className='flex flex-row justify-between align-center mb-2'>
                         <p>Título: </p>
@@ -87,7 +87,7 @@ export default function ModalCreate({ onClose, refresh }: { onClose: () => void,
                     </div>
 
                     {/* Campo: Imagen (URL) */}
-                    <div className='flex flex-row justify-between align-center mb-2'>
+                    <figure className='flex flex-row justify-between align-center mb-2'>
                         <p>Imagen (URL): </p>
                         <input
                             type="text"
@@ -96,7 +96,7 @@ export default function ModalCreate({ onClose, refresh }: { onClose: () => void,
                             onChange={handleInputChange}
                             className="border rounded px-2"
                         />
-                    </div>
+                    </figure>
 
                     {/* Campo: Género */}
                     <div className='flex flex-row justify-between align-center mb-2'>
@@ -150,10 +150,10 @@ export default function ModalCreate({ onClose, refresh }: { onClose: () => void,
                             className="border rounded px-2"
                         />
                     </div>
-                </div>
+                </section>
 
                 {/* Botones de acción */}
-                <div className="flex justify-end mt-4">
+                <section className="flex justify-end mt-4">
                     <button
                         onClick={onClose}
                         className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mr-2"
@@ -166,8 +166,8 @@ export default function ModalCreate({ onClose, refresh }: { onClose: () => void,
                     >
                         Crear Usuario
                     </button>
-                </div>
-        </div>
-    </div>
+                </section>
+        </aside>
+    </main>
     );
 }

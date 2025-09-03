@@ -48,18 +48,18 @@ function App() {
 
   return (
     <>
-    <div className='w-full flex justify-center items-center'>
+    <header className='w-full flex justify-center items-center'>
         <h1 >Módulo de Consulta y Registros de Usuarios al sistema</h1>
         <img className="w-20 h-20 p-1 m-4 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671151.jpg?t=st=1742350863~exp=1742354463~hmac=5403c1870b0baf07c8bc1286837b1a4aa6514f363b214b0bc20a3616ca4fa534&w=740" alt="Bordered avatar image" />
-    </div>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    </header>
+    <aside className="relative overflow-x-auto shadow-md sm:rounded-lg">
           {modalInfo && <ModalInfo idUser={modalInfo} onClose={closeModalInfo} />}
           {modalEdit && <ModalEdit user={modalEdit} onClose={closeModalEdit} refresh={getData} />}
           {modalDelete && <ModalDelete idUser={modalDelete} onClose={closeModalDelete} refresh={getData} />}
           {modalCreate && <ModalCreate onClose={closeModalCreate} refresh={getData} />}
-          <div className='flex justify-end m-8'>
+          <section className='flex justify-end m-8'>
             <button onClick={() => setModalCreate(true)}>Crear usuario</button>
-          </div>
+          </section>
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -101,8 +101,8 @@ function App() {
                     ))}
                 </tbody>
             </table>
-        </div>
-        <div className='m-8'>
+        </aside>
+        <aside className='m-8'>
           <button onClick={pageBack} className={`p-2 ${actualPage === 0 ? 'bg-red-500' : 'bg-blue-500'}`} disabled={actualPage === 0}>
             Anterior
           </button>
@@ -114,7 +114,7 @@ function App() {
           >
             Siguiente
           </button>
-        </div>
+        </aside>
     </>
   )
 }
